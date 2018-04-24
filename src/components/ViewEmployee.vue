@@ -39,8 +39,7 @@ export default {
         }
     },
     beforeRouteEnter: (to, from, next) => {
-        db.collection('employees').where('employee_id', '==', to.params.id).get().then
-        (querySnapshot => {
+        db.collection('employees').where('employee_id', '==', to.params.id).get().then(querySnapshot => {
             querySnapshot.forEach(doc => {
                 next(vm => {
                     vm.employee_id = doc.data().employee_id
@@ -56,8 +55,7 @@ export default {
     },
     methods: {
         fetchData() {
-            db.collection('employees').where('employee_id', '==', this.$route.params.id).get().then
-            (querySnapshot => {
+            db.collection('employees').where('employee_id', '==', this.$route.params.id).get().then(querySnapshot => {
                 querySnapshot.forEach(doc => {
                     this.employee_id = doc.data().employee_id,
                     this.name = doc.data().name,
@@ -68,8 +66,7 @@ export default {
         },
         deleteEmployee() {
             if (confirm('Are you sure?')) {
-                db.collection('employees').where('employee_id', '==', this.$route.params.id).get().then
-                (querySnapshot => {
+                db.collection('employees').where('employee_id', '==', this.$route.params.id).get().then(querySnapshot => {
                     querySnapshot.forEach(doc => {
                         doc.ref.delete()
                         this.$router.push('/')
